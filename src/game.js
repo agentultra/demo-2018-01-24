@@ -114,21 +114,18 @@ const clr = () => {
     stage.fillRect(0, 0, stageW, stageH)
 }
 
+const tileFillStyles = {
+    [tiles.FLOOR]: 'gray',
+    [tiles.WALL]: 'blue'
+}
+
 const render = () => {
     clr()
     const {player, enemies, map} = state
     for (let y = 0; y < map.height; y++) {
         for (let x = 0; x < map.width; x++) {
-            switch(getTile(x, y)) {
-            case tiles.FLOOR:
-                stage.fillStyle = 'gray'
-                stage.fillRect(x * tileW, y * tileH, tileW, tileH)
-                break;
-            case tiles.WALL:
-                stage.fillStyle = 'blue'
-                stage.fillRect(x * tileW, y * tileH, tileW, tileH)
-                break;
-            }
+            stage.fillStyle = tileFillStyles[getTile(x, y)]
+            stage.fillRect(x * tileW, y * tileH, tileW, tileH)
         }
     }
     stage.fillStyle = 'green'
